@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/memory-portrait/person.schema.json",
+  "title": "Memory Portrait Person Profile",
+  "type": "object",
+  "required": ["schemaVersion", "person", "appearance", "memories", "outputPolicy"],
+  "properties": {
+    "schemaVersion": {
+      "type": "string"
+    },
+    "person": {
+      "type": "object",
+      "required": ["displayName", "relationship"],
+      "properties": {
+        "displayName": { "type": "string" },
+        "relationship": { "type": "string" },
+        "rememberedPeriod": { "type": "string" },
+        "ageRange": { "type": "string" },
+        "regionOrContext": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "appearance": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/memoryField"
+      }
+    },
+    "memories": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["contributor", "text"],
+        "properties": {
+          "contributor": { "type": "string" },
+          "text": { "type": "string" },
+          "date": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "outputPolicy": {
+      "type": "object",
+      "required": ["labelAsAiGenerated", "allowPublicSharing"],
+      "properties": {
+        "labelAsAiGenerated": { "type": "boolean" },
+        "allowPublicSharing": { "type": "boolean" },
+        "notes": { "type": "string" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "memoryField": {
+      "type": "object",
+      "required": ["value", "certainty"],
+      "properties": {
+        "value": { "type": "string" },
+        "certainty": {
+          "type": "string",
+          "enum": ["high", "medium", "low", "unknown"]
+        },
+        "sources": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
