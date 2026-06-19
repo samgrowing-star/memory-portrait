@@ -26,17 +26,33 @@
 - 冒充真实历史照片。
 - 未经同意公开逝者或亲属相关资料。
 
+## Skill-first 方向
+
+本项目的核心不依赖自建大模型服务,而是作为一个可复用 Skill,指导具备图像生成能力的大模型完成:
+
+- 记忆采集
+- 伦理边界检查
+- 图像生成提示词构造
+- 多轮候选选择
+- 不确定性标注
+- 纪念档案导出
+
+Skill 位于:
+
+```text
+skills/memory-portrait/
+```
+
+Web App 是这个 Skill 的可视化原型,用于验证交互流程。
+
 ## MVP 范围
 
-第一阶段优先做一个可运行、可贡献、可讨论的最小版本:
+第一阶段优先做两个可运行、可贡献、可讨论的最小版本:
 
-- 创建人物记忆档案。
-- 填写结构化样貌与背景问卷。
-- 使用候选图网格完成多轮选择交互。
-- 暂时使用 Mock 生成器或预置候选图跑通流程。
-- 导出 Markdown、YAML 和图片组成的纪念档案。
+- 一个 `memory-portrait` Skill,用于图像生成大模型的工作流编排。
+- 一个无 GPU Web MVP,用于本地验证人物档案、候选选择和导出流程。
 
-GPU 模型推理会作为可选 provider 接入,而不是 MVP 的前置条件。
+GPU 模型推理或外部图像生成服务会作为可选 provider 接入,而不是 MVP 的前置条件。
 
 ## 推荐技术方向
 
@@ -65,13 +81,19 @@ GPU 模型推理会作为可选 provider 接入,而不是 MVP 的前置条件。
 │       ├── README.md
 │       ├── memories.md
 │       └── person.yaml
-└── schemas/
-    └── person.schema.json
+├── schemas/
+│   └── person.schema.json
+├── skills/
+│   └── memory-portrait/
+│       ├── SKILL.md
+│       ├── agents/
+│       └── references/
+└── src/
 ```
 
 ## 当前状态
 
-项目当前已经包含一个无 GPU 的 Vite + React MVP。它使用 Mock 候选肖像验证人物档案、候选选择、迭代生成和 JSON 导出流程。
+项目当前已经包含一个 `memory-portrait` Skill 和一个无 GPU 的 Vite + React MVP。Web MVP 使用 Mock 候选肖像验证人物档案、候选选择、迭代生成和 JSON 导出流程。
 
 ## 本地运行
 

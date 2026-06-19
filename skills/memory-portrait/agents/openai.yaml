@@ -1,0 +1,4 @@
+interface:
+  display_name: "Memory Portrait"
+  short_description: "Create ethical AI memory portraits"
+  default_prompt: "Use $memory-portrait to create an ethical, memory-based memorial portrait archive."
